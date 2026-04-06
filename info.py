@@ -1,56 +1,72 @@
-from os import environ, getenv
+from os import environ
 from Script import script
 
+# ================== HELPER FUNCTIONS ==================
+
+def get_int(value, default=0):
+    try:
+        return int(value)
+    except:
+        return default
+
+def get_bool(value, default=False):
+    return str(value).lower() in ("true", "1", "yes")
+
+def get_list(value):
+    return [int(x) for x in str(value).split() if x.lstrip('-').isdigit()]
+
 # 🚀 __Bot Configuration__
-SESSION = environ.get('SESSION', 'RexBots')  # Session name
-API_ID = int(environ.get('API_ID', ''))
-API_HASH = environ.get('API_HASH', '')
-BOT_TOKEN = environ.get('BOT_TOKEN', '')
+SESSION = environ.get('SESSION', 'filetolinkbot')
+
+API_ID = get_int(environ.get('API_ID', '34724970'))
+API_HASH = environ.get('API_HASH', 'f240eae7c60e8e30c17203ab0e052f7e')
+BOT_TOKEN = environ.get('BOT_TOKEN', '8673437580:AAG1f0gCUbQ0lUD5BpozjhXg2OPLA8YSZFo')
 
 # 👑 __Owner & Admins__
-ADMINS = [int(i) for i in environ.get('ADMINS', '').split()]
-AUTH_CHANNEL = [int(i) for i in environ.get("AUTH_CHANNEL", "").split()]
-OWNER_USERNAME = environ.get("OWNER_USERNAME", 'CantarellaBots')
-BOT_USERNAME = environ.get("BOT_USERNAME", 'CantarellaBots')
+ADMINS = get_list(environ.get('ADMINS', '7892805795'))
+AUTH_CHANNEL = get_list(environ.get("AUTH_CHANNEL", "-1003515041061"))
+
+OWNER_USERNAME = environ.get("OWNER_USERNAME", 'anujedits76')
+BOT_USERNAME = environ.get("BOT_USERNAME", 'file_to_link_ak_bot')
 
 # 🔗 __Channel & Support Links__
-CHANNEL = environ.get('CHANNEL', 'https://t.me/cantarellabots')
-SUPPORT = environ.get('SUPPORT', 'https://t.me/cantarellabots')
-HOW_TO_VERIFY = environ.get('HOW_TO_VERIFY', 'https://t.me/cantarellabots')
-HOW_TO_OPEN = environ.get('HOW_TO_OPEN', 'https://t.me/cantarellabots')
+CHANNEL = environ.get('CHANNEL', 'https://t.me/log_channel_a')
+SUPPORT = environ.get('SUPPORT', 'https://t.me/log_channel_a')
+HOW_TO_VERIFY = environ.get('HOW_TO_VERIFY', 'https://t.me/log_channel_a/238')
+HOW_TO_OPEN = environ.get('HOW_TO_OPEN', 'https://t.me/log_channel_a/238')
 
 # 📢 __Log Channels__
-BIN_CHANNEL = int(environ.get("BIN_CHANNEL", ''))
-LOG_CHANNEL = int(environ.get("LOG_CHANNEL", '-'))
-PREMIUM_LOGS = int(environ.get("PREMIUM_LOGS", ''))
-VERIFIED_LOG = int(environ.get('VERIFIED_LOG', ''))
-SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", ""))
+BIN_CHANNEL = get_int(environ.get("BIN_CHANNEL", '-1003515041061'))
+LOG_CHANNEL = get_int(environ.get("LOG_CHANNEL", '-1003515041061'))
+PREMIUM_LOGS = get_int(environ.get("PREMIUM_LOGS", '-1003515041061'))
+VERIFIED_LOG = get_int(environ.get('VERIFIED_LOG', '-1003515041061'))
+SUPPORT_GROUP = get_int(environ.get("SUPPORT_GROUP", "-1003791508617"))
 
 # ✅ __Feature Toggles__
-VERIFY = False  # Enable user verification
-FSUB = environ.get("FSUB", True)  # Force Subscribe
-ENABLE_LIMIT = environ.get("ENABLE_LIMIT", True)
+VERIFY = False
+FSUB = get_bool(environ.get("FSUB", True))
+ENABLE_LIMIT = get_bool(environ.get("ENABLE_LIMIT", True))
 BATCH_VERIFY = False
 IS_SHORTLINK = False
-MAINTENANCE_MODE = environ.get("MAINTENANCE_MODE", False)
-PROTECT_CONTENT = environ.get('PROTECT_CONTENT', False)
-PUBLIC_FILE_STORE = environ.get('PUBLIC_FILE_STORE', True)
-BATCH_PROTECT_CONTENT = environ.get('BATCH_PROTECT_CONTENT', False)
+MAINTENANCE_MODE = get_bool(environ.get("MAINTENANCE_MODE", False))
+PROTECT_CONTENT = get_bool(environ.get('PROTECT_CONTENT', False))
+PUBLIC_FILE_STORE = get_bool(environ.get('PUBLIC_FILE_STORE', True))
+BATCH_PROTECT_CONTENT = get_bool(environ.get('BATCH_PROTECT_CONTENT', False))
 
 # 🔗 __Shortlink Configuration__
-SHORTLINK_URL = environ.get('SHORTLINK_URL', '')
-SHORTLINK_API = environ.get('SHORTLINK_API', '')
+SHORTLINK_URL = environ.get('SHORTLINK_URL', 'shrink.pe')
+SHORTLINK_API = environ.get('SHORTLINK_API', '372b23dabae021f93ca15408fc7a674ec4ec2ce3')
 
 # 💾 __Database Configuration__
-DB_URL = environ.get('DATABASE_URI', "")
-DB_NAME = environ.get('DATABASE_NAME', "rexlinkbot")
+DB_URL = environ.get('DATABASE_URI', "mongodb+srv://Anujedit:Anujedit@cluster0.7cs2nhd.mongodb.net/?appName=Cluster0")
+DB_NAME = environ.get('DATABASE_NAME', "Anujedit")
 
 # 📸 __Media & Images__
 QR_CODE = environ.get('QR_CODE', 'https://ibb.co/mVkSySr7')
 VERIFY_IMG = environ.get("VERIFY_IMG", "https://ibb.co/mVkSySr7")
 AUTH_PICS = environ.get('AUTH_PICS', 'https://ibb.co/mVkSySr7')
-PICS = environ.get('PICS', 'https://ibb.co/mVkSySr7')
-FILE_PIC = environ.get('FILE_PIC', 'https://ibb.co/mVkSySr7')
+PICS = environ.get('PICS', 'https://files.catbox.moe/b6vtfh.jpg')
+FILE_PIC = environ.get('FILE_PIC', 'https://files.catbox.moe/b6vtfh.jpg')
 
 # 📝 __Captions__
 FILE_CAPTION = environ.get('FILE_CAPTION', script.CAPTION)
@@ -58,36 +74,32 @@ BATCH_FILE_CAPTION = environ.get('BATCH_FILE_CAPTION', script.CAPTION)
 CHANNEL_FILE_CAPTION = environ.get('CHANNEL_FILE_CAPTION', script.CAPTION)
 
 # ⏱️ __Time & Limits__
-PING_INTERVAL = int(environ.get("PING_INTERVAL", 1200))
-SLEEP_THRESHOLD = int(environ.get('SLEEP_THRESHOLD', 60))
-RATE_LIMIT_TIMEOUT = int(environ.get("RATE_LIMIT_TIMEOUT", 600))
-MAX_FILES = int(environ.get("MAX_FILES", 50))
-VERIFY_EXPIRE = int(environ.get('VERIFY_EXPIRE', 60))  # Hours
-
+PING_INTERVAL = get_int(environ.get("PING_INTERVAL", 1200))
+SLEEP_THRESHOLD = get_int(environ.get('SLEEP_THRESHOLD', 60))
+RATE_LIMIT_TIMEOUT = get_int(environ.get("RATE_LIMIT_TIMEOUT", 600))
+MAX_FILES = get_int(environ.get("MAX_FILES", 50))
+VERIFY_EXPIRE = get_int(environ.get('VERIFY_EXPIRE', 60))
+ON_HEROKU = get_bool(environ.get('ON_HEROKU', False))
 # ⚙️ __Worker & App Config__
-WORKERS = int(environ.get('WORKERS', 10))
+WORKERS = get_int(environ.get('WORKERS', 10))
 MULTI_CLIENT = False
-NAME = environ.get('name', 'CantarellaBots')
-
+NAME = environ.get('name', 'Anujedits76')
+ON_HEROKU = get_bool(environ.get('ON_HEROKU', False))
 # 🌐 __Web Server__
-ON_HEROKU = 'DYNO' in environ
-APP_NAME = environ.get('APP_NAME') if ON_HEROKU else None
-
-PORT = int(environ.get('PORT', 2626))
-NO_PORT = str(environ.get("NO_PORT", "true")).lower() in ("true", "1", "yes")
-HAS_SSL = str(environ.get("HAS_SSL", "true")).lower() in ("true", "1", "yes")
+PORT = get_int(environ.get('PORT', 5000))
+NO_PORT = get_bool(environ.get("NO_PORT", "true"))
+HAS_SSL = get_bool(environ.get("HAS_SSL", "true"))
 
 # URL Generation
-BIND_ADDRESS = environ.get("WEB_SERVER_BIND_ADDRESS", "")   ##without https:// paste the base url here 
+import os as _os
+_default_domain = _os.environ.get("REPLIT_DEV_DOMAIN", "file-to-link-bot.onrender.com")
+BIND_ADDRESS = environ.get("WEB_SERVER_BIND_ADDRESS", _default_domain)
 FQDN = environ.get("FQDN", BIND_ADDRESS)
 
-if not FQDN.startswith("http"):
+if not str(FQDN).startswith("http"):
     PROTOCOL = "https" if HAS_SSL else "http"
     PORT_SEGMENT = "" if NO_PORT else f":{PORT}"
-    
-    # Clean up trailing slashes for consistency
-    FQDN = FQDN.rstrip('/')
+    FQDN = str(FQDN).rstrip('/')
     URL = f"{PROTOCOL}://{FQDN}{PORT_SEGMENT}/"
 else:
     URL = FQDN
-
