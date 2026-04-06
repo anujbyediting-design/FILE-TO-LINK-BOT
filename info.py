@@ -65,8 +65,8 @@ DB_NAME = environ.get('DATABASE_NAME', "Anujedit")
 QR_CODE = environ.get('QR_CODE', 'https://ibb.co/mVkSySr7')
 VERIFY_IMG = environ.get("VERIFY_IMG", "https://ibb.co/mVkSySr7")
 AUTH_PICS = environ.get('AUTH_PICS', 'https://ibb.co/mVkSySr7')
-PICS = environ.get('PICS', 'https://files.catbox.moe/b6vtfh.jpg')
-FILE_PIC = environ.get('FILE_PIC', 'https://files.catbox.moe/b6vtfh.jpg')
+PICS = environ.get('PICS', 'https://image.zaw-myo.workers.dev/image/c910e030-0067-4855-bd39-4dffb60780ca')
+FILE_PIC = environ.get('FILE_PIC', 'https://image.zaw-myo.workers.dev/image/c910e030-0067-4855-bd39-4dffb60780ca')
 
 # 📝 __Captions__
 FILE_CAPTION = environ.get('FILE_CAPTION', script.CAPTION)
@@ -92,7 +92,7 @@ HAS_SSL = get_bool(environ.get("HAS_SSL", "true"))
 
 # URL Generation
 import os as _os
-_default_domain = _os.environ.get("REPLIT_DEV_DOMAIN", "file-to-link-bot-7.onrender.com")
+_default_domain = _os.environ.get("REPLIT_DEV_DOMAIN", "file-to-link-bot-8.onrender.com")
 BIND_ADDRESS = environ.get("WEB_SERVER_BIND_ADDRESS", _default_domain)
 FQDN = environ.get("FQDN", BIND_ADDRESS)
 
